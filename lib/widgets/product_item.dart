@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/screens/product_detail_screen.dart';
+import 'package:provider/provider.dart';
+import '../providers/product.dart';
+import '../screens/product_detail_screen.dart';
 
 class ProductItem extends StatelessWidget {
-  final String id;
-  final String imageUrl;
-  final String title;
-  final double price;
-
-  ProductItem(this.id, this.title, this.imageUrl, this.price);
+  const ProductItem({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final product = Provider.of<Product>(context);
     void productDetail() {
       Navigator.of(context)
-          .pushNamed(ProductDetailScreen.routeName, arguments: id);
+          .pushNamed(ProductDetailScreen.routeName, arguments: product.id);
     }
 
     return InkWell(
@@ -21,14 +19,10 @@ class ProductItem extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: GridTile(
-          child: Image.network(
-            imageUrl,
-            fit: BoxFit.contain,
-          ),
           header: GridTileBar(
             backgroundColor: Colors.black87,
             title: Text(
-              title,
+              product.title,
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 14,
@@ -39,12 +33,16 @@ class ProductItem extends StatelessWidget {
           footer: GridTileBar(
             backgroundColor: Colors.black87,
             leading: IconButton(
-              icon: const Icon(Icons.favorite),
-              onPressed: () {},
+              icon: Icon(product.isFavourite
+                  ? Icons.favorite
+                  : Icons.favorite_outline_outlined),
+              onPressed: () {
+                product.toggleIsFavouriteStatus();
+              },
               color: Theme.of(context).secondaryHeaderColor,
             ),
             title: Text(
-              "\$${price.toStringAsFixed(2)}",
+              "\$${product.price.toStringAsFixed(2)}",
               style: const TextStyle(
                 fontSize: 12,
                 overflow: TextOverflow.fade,
@@ -55,6 +53,10 @@ class ProductItem extends StatelessWidget {
               onPressed: () {},
               color: Theme.of(context).secondaryHeaderColor,
             ),
+          ),
+          child: Image.network(
+            product.imageUrl,
+            fit: BoxFit.contain,
           ),
         ),
       ),
