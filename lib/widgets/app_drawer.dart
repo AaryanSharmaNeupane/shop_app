@@ -40,6 +40,7 @@ class AppDrawer extends StatelessWidget {
                   .pushReplacementNamed(UserProductsScreen.routeName);
             },
           ),
+          const Divider(),
         ],
       ),
     );
