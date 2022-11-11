@@ -69,10 +69,10 @@ class ProductsProvider with ChangeNotifier {
     return _items.firstWhere((prod) => prod.id == id);
   }
 
-  void addProduct(Product product) {
+  Future<void> addProduct(Product product) {
     const url =
         "https://shop-app-571d7-default-rtdb.asia-southeast1.firebasedatabase.app/products.json";
-    http
+   return http
         .post(Uri.parse(url),
             body: json.encode({
               'title': product.title,
