@@ -1,6 +1,6 @@
 "Flutter e-commerce app"
 
-This is an app developed as a practice project. It includes features such as adding, editing and deleting the products. Also, user can select their favourite items in the app.
+This is an app developed to practice flutter framework. It includes features such as adding, editing and deleting the products for ecommerce app. Also, user can select their favourite items in the app.
 
 
 ![i](https://user-images.githubusercontent.com/63339028/210758279-222aba87-5631-4f9d-97ee-7fde9d46daa6.jpg)
